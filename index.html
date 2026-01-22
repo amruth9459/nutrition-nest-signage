@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Nest - Aisle 04</title>
+    <style>
+        /* Exact Portrait Dimensions for Samsung SH37C */
+        :root {
+            --navy: #001F3F;
+            --green: #2ECC71;
+            --white: #FFFFFF;
+            --text: #333333;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 540px;
+            height: 1920px;
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--white);
+        }
+
+        /* Top Section: High Visibility for Aisle Number */
+        .header {
+            height: 550px;
+            background-color: var(--navy);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .aisle-label { font-size: 50px; text-transform: uppercase; letter-spacing: 8px; margin-bottom: -10px; opacity: 0.9; }
+        .aisle-number { font-size: 320px; font-weight: 800; line-height: 1; }
+
+        /* Middle Section: Categories (Eye Level at 42" mount) */
+        .content {
+            height: 1070px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 50px;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .category-text {
+            font-size: 70px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Bottom Section: Branding & QR Code */
+        .footer {
+            height: 300px;
+            background-color: var(--green);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .brand-block { display: flex; flex-direction: column; }
+        .brand-name { font-size: 45px; font-weight: bold; letter-spacing: 1px; }
+        .tagline { font-size: 24px; opacity: 0.9; }
+
+        .qr-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="aisle-label">Aisle</div>
+        <div class="aisle-number">04</div>
+    </div>
+
+    <div class="content">
+        <div class="item-row"><span class="category-text">Baking Needs</span></div>
+        <div class="item-row"><span class="category-text">Flour & Sugar</span></div>
+        <div class="item-row"><span class="category-text">Spices & Herbs</span></div>
+        <div class="item-row"><span class="category-text">Oil & Vinegar</span></div>
+    </div>
+
+    <div class="footer">
+        <div class="brand-block">
+            <div class="brand-name">NUTRITION NEST</div>
+            <div class="tagline">Fresh Savings Daily</div>
+        </div>
+        <div class="qr-placeholder">
+            <svg width="100" height="100" viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm15 0h3v2h-2v2h2v2h-2v2h-2v-8zm-2 0h2v2h-2z" fill="#333"/></svg>
+        </div>
+    </div>
+
+</body>
+</html>
