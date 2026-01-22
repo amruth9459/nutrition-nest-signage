@@ -5,105 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
-            --navy: #001F3F;
+            --navy: #1B365D;
             --brand-green: #2ECC71;
-            --cream: #FDFBF7; /* Natural, organic cream color */
+            --cream: #FDFBF7;
             --text: #2D3436;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
+        /* The Navy background covers any "stretch" areas */
         body, html {
             width: 100vw;
             height: 100vh;
-            background-color: var(--navy); /* Navy acts as a frame if signal stretches */
+            background-color: var(--navy);
             overflow: hidden;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             display: flex;
             justify-content: center;
         }
 
-        /* This wrapper ensures content doesn't look "too tall" */
-        .page-container {
+        /* This container forces the content to stay at a readable width 
+           preventing the "pulled" look seen in your photo */
+        .safe-container {
             width: 100%;
+            max-width: 540px; /* Locked to the actual screen width */
             height: 100%;
             display: flex;
             flex-direction: column;
             background-color: var(--cream);
         }
 
-        /* Header: Aisle ID (Top 22%) */
         .header {
-            flex: 0 0 22vh;
+            flex: 0 0 20%;
             background-color: var(--navy);
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-bottom: 8px solid var(--brand-green);
+            border-bottom: 6px solid var(--brand-green);
         }
-        .aisle-label { font-size: 2.5vh; text-transform: uppercase; letter-spacing: 0.5vw; opacity: 0.8; }
-        .aisle-num { font-size: 11vh; font-weight: 900; line-height: 1; }
 
-        /* Main Body (The "Menu" - 65%) */
-        .product-area {
+        .aisle-label { font-size: 2.2vh; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+        .aisle-num { font-size: 10vh; font-weight: 900; line-height: 1; }
+
+        .list-area {
             flex: 1;
-            padding: 6vh 8vw;
+            padding: 5vh 10%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
 
-        .category-item {
-            font-size: 4vh; /* Conservative size to avoid stretching */
+        .category {
+            font-size: 3.2vh; /* Smaller size avoids vertical elongation */
             font-weight: 700;
             color: var(--text);
-            padding: 3vh 0;
+            padding: 2.5vh 0;
             border-bottom: 1px solid rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
         }
-        
-        /* Small leaf icon for Nutrition Nest branding */
-        .category-item::before {
-            content: "•";
-            color: var(--brand-green);
-            margin-right: 3vw;
-            font-size: 6vh;
-        }
 
-        /* Branding Footer (Bottom 13%) */
         .footer {
-            flex: 0 0 13vh;
+            flex: 0 0 12%;
             background-color: var(--brand-green);
             color: white;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            font-size: 2.8vh;
+            font-weight: 800;
         }
-        .brand-name { font-size: 3vh; font-weight: 800; letter-spacing: 0.1vw; }
-        .tagline { font-size: 1.8vh; font-weight: 400; opacity: 0.9; margin-top: 0.5vh; }
     </style>
 </head>
 <body>
-    <div class="page-container">
+    <div class="safe-container">
         <div class="header">
             <div class="aisle-label">Aisle</div>
             <div class="aisle-num">04</div>
         </div>
-        
-        <div class="product-area">
-            <div class="category-item">Baking Needs</div>
-            <div class="category-item">Flour & Sugar</div>
-            <div class="category-item">Spices & Herbs</div>
-            <div class="category-item">Oil & Vinegar</div>
+        <div class="list-area">
+            <div class="category">Baking Needs</div>
+            <div class="category">Flour & Sugar</div>
+            <div class="category">Spices & Herbs</div>
+            <div class="category">Oil & Vinegar</div>
         </div>
-
         <div class="footer">
-            <div class="brand-name">NUTRITION NEST</div>
-            <div class="tagline">FRESH • ORGANIC • LOCAL</div>
+            NUTRITION NEST
         </div>
     </div>
 </body>
