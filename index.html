@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <style>
-        /* Force remove all margins and padding that cause bars */
-        html, body {
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
+        /* The "No-Bleed" Reset */
+        * { box-sizing: border-box; }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
-            background-color: #001F3F; /* Navy Blue background to hide leaks */
+            background-color: #001F3F; /* Navy background hides edge gaps */
+            font-family: sans-serif;
         }
 
         .container {
@@ -19,11 +22,12 @@
             flex-direction: column;
             width: 100vw;
             height: 100vh;
+            border: 2px solid transparent; /* Keeps content inside */
         }
 
-        /* Using percentages for height to ensure no vertical black bars */
+        /* Top Section - 25% of height */
         .header {
-            height: 28%; 
+            flex: 0 0 25%;
             background-color: #001F3F;
             color: white;
             display: flex;
@@ -32,35 +36,45 @@
             align-items: center;
         }
 
+        /* Middle Section - 60% of height */
         .content {
-            height: 57%;
+            flex: 0 0 60%;
             background-color: white;
             display: flex;
             flex-direction: column;
-            justify-content: space-evenly;
-            padding: 0 8vw;
+            justify-content: center;
+            padding: 0 5vw; /* Safe horizontal margin */
         }
 
+        /* Bottom Section - 15% of height */
         .footer {
-            height: 15%;
+            flex: 0 0 15%;
             background-color: #2ECC71;
             color: white;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
-            padding: 0 8vw;
+            padding: 0 5vw;
         }
 
-        /* Responsive Text Sizes */
-        .aisle-number { font-size: 25vh; font-weight: 800; font-family: sans-serif; }
-        .item { font-size: 4.5vh; font-weight: 600; font-family: sans-serif; color: #333; }
-        .brand { font-size: 3vh; font-weight: bold; font-family: sans-serif; }
+        /* Responsive Text: using vh (Viewport Height) is key for portrait */
+        .aisle-number { font-size: 18vh; font-weight: 900; line-height: 1; }
+        .aisle-label { font-size: 3vh; text-transform: uppercase; letter-spacing: 0.5vw; }
+        .item { 
+            font-size: 4.5vh; 
+            font-weight: 700; 
+            color: #333; 
+            margin: 1.5vh 0;
+            border-left: 1vw solid #2ECC71;
+            padding-left: 2vw;
+        }
+        .brand { font-size: 3.5vh; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div style="font-size: 4vh; text-transform: uppercase;">Aisle</div>
+            <div class="aisle-label">Aisle</div>
             <div class="aisle-number">04</div>
         </div>
         <div class="content">
@@ -71,7 +85,6 @@
         </div>
         <div class="footer">
             <div class="brand">NUTRITION NEST</div>
-            <div style="font-size: 2vh;">Fresh Savings</div>
         </div>
     </div>
 </body>
