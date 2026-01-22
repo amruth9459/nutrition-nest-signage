@@ -2,90 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        :root {
-            --navy: #1B365D;
-            --brand-green: #2ECC71;
-            --cream: #FDFBF7;
-            --text: #2D3436;
-        }
-
+        /* Force zero margins to prevent any black border leaks */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* The Navy background covers any "stretch" areas */
         body, html {
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--navy);
+            width: 100%;
+            height: 100%;
             overflow: hidden;
-            font-family: 'Inter', -apple-system, sans-serif;
-            display: flex;
-            justify-content: center;
+            background-color: #1B365D; /* Navy base */
+            font-family: 'Inter', sans-serif;
         }
 
-        /* This container forces the content to stay at a readable width 
-           preventing the "pulled" look seen in your photo */
-        .safe-container {
-            width: 100%;
-            max-width: 540px; /* Locked to the actual screen width */
-            height: 100%;
+        /* FLEX CONTAINER: Set to fill 100% of the available viewport height */
+        .full-display {
             display: flex;
             flex-direction: column;
-            background-color: var(--cream);
+            width: 100vw;
+            height: 100vh;
         }
 
+        /* Header: 20% Height */
         .header {
             flex: 0 0 20%;
-            background-color: var(--navy);
+            background-color: #1B365D;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-bottom: 6px solid var(--brand-green);
+            border-bottom: 4px solid #2ECC71;
         }
 
-        .aisle-label { font-size: 2.2vh; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
-        .aisle-num { font-size: 10vh; font-weight: 900; line-height: 1; }
-
-        .list-area {
-            flex: 1;
-            padding: 5vh 10%;
+        /* Body: 68% Height - Natural Cream Color */
+        .body-content {
+            flex: 0 0 68%;
+            background-color: #FDFBF7;
+            padding: 4vh 8vw;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
 
-        .category {
-            font-size: 3.2vh; /* Smaller size avoids vertical elongation */
-            font-weight: 700;
-            color: var(--text);
-            padding: 2.5vh 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-        }
-
+        /* Footer: 12% Height - Brand Green */
         .footer {
             flex: 0 0 12%;
-            background-color: var(--brand-green);
+            background-color: #2ECC71;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.8vh;
+            font-size: 3vh;
             font-weight: 800;
+        }
+
+        /* Scaled Text to combat the 'Pulled' look in your photo */
+        .aisle-num { font-size: 10vh; font-weight: 900; line-height: 1; }
+        .category {
+            font-size: 3.5vh;
+            font-weight: 700;
+            color: #2D3436;
+            margin: 2vh 0;
+            padding-bottom: 1vh;
+            border-bottom: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
-    <div class="safe-container">
+    <div class="full-display">
         <div class="header">
-            <div class="aisle-label">Aisle</div>
+            <div style="font-size: 2vh; text-transform: uppercase;">Aisle</div>
             <div class="aisle-num">04</div>
         </div>
-        <div class="list-area">
+        <div class="body-content">
             <div class="category">Baking Needs</div>
             <div class="category">Flour & Sugar</div>
             <div class="category">Spices & Herbs</div>
