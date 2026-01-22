@@ -1,37 +1,78 @@
-<style>
-    /* Force the browser to fill the 16:4.5 stretched display */
-    * {
-        box-sizing: border-box;
-        -webkit-margin-before: 0;
-        -webkit-margin-after: 0;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <style>
+        /* Force remove all margins and padding that cause bars */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            overflow: hidden;
+            background-color: #001F3F; /* Navy Blue background to hide leaks */
+        }
 
-    body, html {
-        margin: 0;
-        padding: 0;
-        width: 100vw; /* Use Viewport Width */
-        height: 100vh; /* Use Viewport Height */
-        overflow: hidden;
-        background-color: #001F3F; /* Navy Blue */
-    }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+        }
 
-    /* Use a Grid to ensure zero gaps between sections */
-    .container {
-        display: grid;
-        grid-template-rows: 550px 1070px 300px; /* Totals 1920px */
-        width: 100%;
-        height: 100%;
-    }
+        /* Using percentages for height to ensure no vertical black bars */
+        .header {
+            height: 28%; 
+            background-color: #001F3F;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .header { background-color: #001F3F; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .content { background-color: white; display: flex; flex-direction: column; justify-content: center; padding: 0 50px; }
-    .footer { background-color: #2ECC71; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
-    
-    /* ... rest of your styles ... */
-</style>
+        .content {
+            height: 57%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 0 8vw;
+        }
 
-<div class="container">
-    <div class="header">...</div>
-    <div class="content">...</div>
-    <div class="footer">...</div>
-</div>
+        .footer {
+            height: 15%;
+            background-color: #2ECC71;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8vw;
+        }
+
+        /* Responsive Text Sizes */
+        .aisle-number { font-size: 25vh; font-weight: 800; font-family: sans-serif; }
+        .item { font-size: 4.5vh; font-weight: 600; font-family: sans-serif; color: #333; }
+        .brand { font-size: 3vh; font-weight: bold; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div style="font-size: 4vh; text-transform: uppercase;">Aisle</div>
+            <div class="aisle-number">04</div>
+        </div>
+        <div class="content">
+            <div class="item">Baking Needs</div>
+            <div class="item">Flour & Sugar</div>
+            <div class="item">Spices & Herbs</div>
+            <div class="item">Oil & Vinegar</div>
+        </div>
+        <div class="footer">
+            <div class="brand">NUTRITION NEST</div>
+            <div style="font-size: 2vh;">Fresh Savings</div>
+        </div>
+    </div>
+</body>
+</html>
