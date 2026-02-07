@@ -21,7 +21,7 @@
             font-family: 'Montserrat', sans-serif;
             height: 100vh;
             width: 100vw;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden; /* CRITICAL: Prevents scrolling */
             position: relative;
         }
 
@@ -30,29 +30,29 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 45%; 
-            height: 50%; 
+            width: 50vw; 
+            height: 60vh; 
             z-index: 0;
             background-image: radial-gradient(rgba(255, 255, 255, 0.5) 2px, transparent 2px);
-            background-size: 30px 30px;
+            background-size: 35px 35px;
             /* Fade out mask */
-            mask-image: linear-gradient(to top right, black 20%, transparent 80%);
-            -webkit-mask-image: linear-gradient(to top right, black 20%, transparent 80%);
+            mask-image: radial-gradient(circle at bottom left, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at bottom left, black 40%, transparent 100%);
         }
 
         /* --- LEFT COLUMN (Menu) --- */
         .left-col {
             position: absolute;
-            top: 15vh;
-            left: 8vw;
+            top: 18vh; /* Locked vertical position */
+            left: 8vw; /* Locked horizontal position */
             z-index: 2;
         }
 
         .header {
-            font-size: 3vh;
+            font-size: 3.5vh;
             color: var(--text-dark);
             font-weight: 300; /* Light */
-            margin-bottom: 4vh;
+            margin-bottom: 5vh;
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
@@ -60,77 +60,79 @@
         .menu-items {
             display: flex;
             flex-direction: column;
-            gap: 1.8vh;
+            gap: 2.5vh; /* Fixed gap between items */
         }
 
         .item {
-            font-size: 2.5vh;
+            font-size: 2.8vh;
             color: var(--text-dark);
             font-weight: 600; /* Bold */
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
 
-        /* --- RIGHT COLUMN (Strict Layout) --- */
+        /* --- RIGHT COLUMN CONTAINER --- */
         .right-col {
             position: absolute;
-            top: 0;
+            top: 5vh;
             right: 8vw;
-            height: 100%;
-            width: 20vw; /* Fixed width lane */
+            bottom: 0;
+            width: 15vh; /* Fixed width to ensure alignment */
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 2;
         }
 
-        /* The "12" */
+        /* The Number 12 */
         .number {
-            margin-top: 5vh;
-            font-size: 15vh; /* Large but fits */
+            font-size: 18vh; 
             color: var(--text-white);
             font-weight: 200;
-            line-height: 1;
+            line-height: 0.8;
+            margin-bottom: 2vh;
             text-align: center;
-            width: 100%;
         }
 
-        /* The Vertical Text Container */
-        .vertical-wrapper {
-            flex-grow: 1; /* Take up all remaining space */
+        /* The Vertical Text "ORGANIC PANTRY" */
+        .vertical-text-container {
+            flex-grow: 1; /* Fills space between number and bottom */
+            position: relative;
+            width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 2vh 0;
-            position: relative;
         }
 
-        /* The Text Itself */
         .vertical-text {
-            /* Standard vertical writing (top to bottom, letters face right) */
-            writing-mode: vertical-rl;
+            /* This is the standard vertical orientation */
+            writing-mode: vertical-rl; 
             text-orientation: mixed;
             
-            /* FLIP IT: Rotates 180 so letters face LEFT (like design) */
-            transform: rotate(180deg);
-            
             color: var(--text-white);
-            font-size: 6vh; /* CRITICAL: Reduced to fit height */
+            font-size: 6.5vh; /* SCALED DOWN to fit perfectly */
             font-weight: 400;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em; /* Widespacing like the design */
             text-transform: uppercase;
-            white-space: nowrap; /* Forces single line */
+            
+            /* CRITICAL: Forces text to stay on one line */
+            white-space: nowrap; 
+            
+            /* Alignment */
+            position: absolute;
+            top: 0;
         }
 
-        /* The Logo */
+        /* The Logo Overlay */
         .logo-arch {
+            position: absolute;
+            bottom: 5vh;
             width: 7vh;
             height: 9vh;
             border: 1.2vh solid var(--accent-gold);
             border-bottom: 0;
             border-radius: 50px 50px 0 0;
-            margin-bottom: 5vh; /* Distance from bottom edge */
-            z-index: 10;
+            z-index: 10; /* Sits on top of the text */
+            background: transparent; 
         }
 
     </style>
@@ -153,9 +155,11 @@
 
     <div class="right-col">
         <div class="number">12</div>
-        <div class="vertical-wrapper">
+        
+        <div class="vertical-text-container">
             <div class="vertical-text">Organic Pantry</div>
         </div>
+
         <div class="logo-arch"></div>
     </div>
 
