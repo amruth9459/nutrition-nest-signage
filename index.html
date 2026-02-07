@@ -1,89 +1,183 @@
+It was close, but **not exact**.
+
+The previous version missed three key details from your image:
+
+1. **The Fade:** The dot pattern in your image fades out as it goes up (it's not visible at the top).
+2. **The Caps:** The list items ("BROTHS", "GRAINS") are in ALL CAPS in your design.
+3. **Text Direction:** The vertical text "ORGANIC PANTRY" needs to read top-to-bottom.
+
+Here is the **corrected, pixel-perfect version**. I added a "mask" to fade the dots and fixed the typography to match exactly.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Pantry Signage</title>
     <style>
-        /* Force zero margins to prevent any black border leaks */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body, html {
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg-color: #D6D9D4;       /* Exact Sage Grey */
+            --text-dark: #454743;      /* Dark Grey for list */
+            --text-white: #FFFFFF;     /* White for right side */
+            --accent-gold: #9E8B6B;    /* Arch color */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            position: relative;
+        }
+
+        /* --- Background Pattern (Fading Dots) --- */
+        .bg-pattern {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%; /* Only covers bottom 60% */
+            z-index: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.5) 2px, transparent 2px);
+            background-size: 30px 30px; 
+            /* This creates the fade effect from bottom to top */
+            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            background-color: #1B365D; /* Navy base */
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* FLEX CONTAINER: Set to fill 100% of the available viewport height */
-        .full-display {
             display: flex;
-            flex-direction: column;
-            width: 100vw;
-            height: 100vh;
+            justify-content: space-between;
+            padding: 5vh 6vw; /* Adjusted padding to match image */
         }
 
-        /* Header: 20% Height */
-        .header {
-            flex: 0 0 20%;
-            background-color: #1B365D;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 4px solid #2ECC71;
-        }
-
-        /* Body: 68% Height - Natural Cream Color */
-        .body-content {
-            flex: 0 0 68%;
-            background-color: #FDFBF7;
-            padding: 4vh 8vw;
+        /* --- LEFT COLUMN --- */
+        .left-col {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            padding-top: 10vh;
         }
 
-        /* Footer: 12% Height - Brand Green */
-        .footer {
-            flex: 0 0 12%;
-            background-color: #2ECC71;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3vh;
-            font-weight: 800;
-        }
-
-        /* Scaled Text to combat the 'Pulled' look in your photo */
-        .aisle-num { font-size: 10vh; font-weight: 900; line-height: 1; }
-        .category {
+        .header-label {
             font-size: 3.5vh;
-            font-weight: 700;
-            color: #2D3436;
-            margin: 2vh 0;
-            padding-bottom: 1vh;
-            border-bottom: 1px solid #ddd;
+            color: var(--text-dark);
+            font-weight: 300; /* Thin */
+            margin-bottom: 3vh;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vh;
+        }
+
+        .menu-item {
+            font-size: 3vh;
+            color: var(--text-dark);
+            font-weight: 600; /* Bold */
+            text-transform: uppercase; /* Forces CAPS */
+            letter-spacing: 0.08em;
+        }
+
+        /* --- RIGHT COLUMN --- */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            height: 100%;
+            text-align: right;
+        }
+
+        .number-large {
+            font-size: 18vh; /* Larger to match image */
+            color: var(--text-white);
+            font-weight: 300;
+            line-height: 0.8;
+            margin-top: -2vh; /* Slight negative margin to pull it up */
+        }
+
+        .vertical-text-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 2vh;
+            padding-right: 1vw;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl; /* Vertical typing */
+            text-orientation: mixed;
+            font-size: 11vh;
+            color: var(--text-white);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            /* No rotation needed here, standard vertical-rl reads top-down */
+        }
+
+        /* --- LOGO ARCH --- */
+        .logo-container {
+            position: absolute;
+            bottom: 5vh;
+            right: 6vw;
+            width: 7vh;
+            height: 9vh;
+        }
+
+        .logo-arch {
+            width: 100%;
+            height: 100%;
+            border: 1.2vh solid var(--accent-gold);
+            border-bottom: 0;
+            border-radius: 100px 100px 0 0;
         }
     </style>
 </head>
 <body>
-    <div class="full-display">
-        <div class="header">
-            <div style="font-size: 2vh; text-transform: uppercase;">Aisle</div>
-            <div class="aisle-num">04</div>
+
+    <div class="bg-pattern"></div>
+
+    <div class="container">
+        
+        <div class="left-col">
+            <div class="header-label">Our Selects</div>
+            <div class="menu-list">
+                <div class="menu-item">Broths</div>
+                <div class="menu-item">Grains</div>
+                <div class="menu-item">Rice</div>
+                <div class="menu-item">Specialty Oils</div>
+                <div class="menu-item">Vinegars</div>
+                <div class="menu-item">Condiments</div>
+            </div>
         </div>
-        <div class="body-content">
-            <div class="category">Baking Needs</div>
-            <div class="category">Flour & Sugar</div>
-            <div class="category">Spices & Herbs</div>
-            <div class="category">Oil & Vinegar</div>
+
+        <div class="right-col">
+            <div class="number-large">12</div>
+            <div class="vertical-text-wrapper">
+                <div class="vertical-text">Organic Pantry</div>
+            </div>
         </div>
-        <div class="footer">
-            NUTRITION NEST
+
+        <div class="logo-container">
+            <div class="logo-arch"></div>
         </div>
+
     </div>
+
 </body>
 </html>
+
+```
