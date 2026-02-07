@@ -5,168 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organic Pantry Signage</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+        /* Montserrat is the closest free Google Font to this design */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&display=swap');
 
         :root {
-            --bg-color: #D6D9D4;       /* Exact Sage Grey */
-            --text-dark: #454743;      /* Dark Grey for list */
-            --text-white: #FFFFFF;     /* White for right side */
-            --accent-gold: #9E8B6B;    /* Arch color */
+            --bg-color: #D3D6D1;       /* Sage Grey */
+            --text-dark: #4A4A4A;      /* Dark Grey */
+            --text-white: #FFFFFF;     /* White */
+            --accent-gold: #9E8B6B;    /* Arch/Logo Color */
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             font-family: 'Montserrat', sans-serif;
             height: 100vh;
             width: 100vw;
-            margin: 0;
             overflow: hidden;
-            display: flex;
             position: relative;
         }
 
-        /* --- Background Pattern (Fading Dots) --- */
-        .bg-pattern {
+        /* --- 1. Background Dots (Bottom Left Only) --- */
+        .dot-grid {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
-            height: 60%; /* Only covers bottom 60% */
+            width: 50vw;  /* Only covers left half */
+            height: 60vh; /* Only covers bottom 60% */
             z-index: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.5) 2px, transparent 2px);
-            background-size: 30px 30px; 
-            /* This creates the fade effect from bottom to top */
-            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.6) 2px, transparent 2px);
+            background-size: 40px 40px; /* Space between dots */
+            
+            /* Fade effect: Visible at bottom left, fades out going up and right */
+            mask-image: radial-gradient(circle at bottom left, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at bottom left, black 40%, transparent 100%);
         }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 5vh 6vw; /* Adjusted padding to match image */
+        /* --- 2. Left Menu Section --- */
+        .menu-container {
+            position: absolute;
+            top: 15vh;  /* Distance from top */
+            left: 8vw;  /* Distance from left */
+            z-index: 2;
         }
 
-        /* --- LEFT COLUMN --- */
-        .left-col {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-top: 10vh;
-        }
-
-        .header-label {
+        .menu-label {
             font-size: 3.5vh;
             color: var(--text-dark);
-            font-weight: 300; /* Thin */
-            margin-bottom: 3vh;
+            font-weight: 300; /* Light/Thin */
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            margin-bottom: 5vh; /* Large gap before items start */
         }
 
-        .menu-list {
+        .menu-items {
             display: flex;
             flex-direction: column;
-            gap: 1.5vh;
+            gap: 2.2vh; /* Space between items */
         }
 
-        .menu-item {
-            font-size: 3vh;
+        .item {
+            font-size: 2.8vh;
             color: var(--text-dark);
-            font-weight: 600; /* Bold */
-            text-transform: uppercase; /* Forces CAPS */
+            font-weight: 600; /* Semi-Bold */
+            text-transform: uppercase;
             letter-spacing: 0.08em;
         }
 
-        /* --- RIGHT COLUMN --- */
-        .right-col {
+        /* --- 3. Right Column (The "12" and Vertical Text) --- */
+        .right-column {
+            position: absolute;
+            top: 5vh;
+            right: 8vw;
+            bottom: 5vh;
+            width: 15vw; /* Constrain width to keep alignment */
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            height: 100%;
-            text-align: right;
+            align-items: center; /* Centers text horizontally within this column */
+            z-index: 2;
         }
 
-        .number-large {
-            font-size: 18vh; /* Larger to match image */
+        .number {
+            font-size: 22vh; /* Massive size */
             color: var(--text-white);
-            font-weight: 300;
-            line-height: 0.8;
-            margin-top: -2vh; /* Slight negative margin to pull it up */
-        }
-
-        .vertical-text-wrapper {
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
-            padding-top: 2vh;
-            padding-right: 1vw;
+            font-weight: 200; /* Very Thin */
+            line-height: 1;
+            margin-bottom: 2vh;
+            margin-right: -1vw; /* Visual tweak to align visually with text below */
         }
 
         .vertical-text {
-            writing-mode: vertical-rl; /* Vertical typing */
+            writing-mode: vertical-rl;
             text-orientation: mixed;
             font-size: 11vh;
             color: var(--text-white);
-            font-weight: 400;
-            letter-spacing: 0.15em;
+            font-weight: 400; /* Regular weight */
             text-transform: uppercase;
-            /* No rotation needed here, standard vertical-rl reads top-down */
+            letter-spacing: 0.15em;
+            flex-grow: 1; /* Stretches to fill space */
+            text-align: center;
         }
 
-        /* --- LOGO ARCH --- */
-        .logo-container {
+        /* --- 4. The Logo (Arch) --- */
+        .logo-arch {
             position: absolute;
             bottom: 5vh;
-            right: 6vw;
-            width: 7vh;
-            height: 9vh;
+            right: 10vw; /* Aligned with the vertical column */
+            width: 6vh;
+            height: 8vh;
+            border: 1vh solid var(--accent-gold);
+            border-bottom: 0;
+            border-radius: 50px 50px 0 0;
+            z-index: 2;
+            transform: translateX(50%); /* Centers it under the column line */
         }
 
-        .logo-arch {
-            width: 100%;
-            height: 100%;
-            border: 1.2vh solid var(--accent-gold);
-            border-bottom: 0;
-            border-radius: 100px 100px 0 0;
-        }
     </style>
 </head>
 <body>
 
-    <div class="bg-pattern"></div>
+    <div class="dot-grid"></div>
 
-    <div class="container">
+    <div class="menu-container">
+        <div class="menu-label">Our Selects</div>
         
-        <div class="left-col">
-            <div class="header-label">Our Selects</div>
-            <div class="menu-list">
-                <div class="menu-item">Broths</div>
-                <div class="menu-item">Grains</div>
-                <div class="menu-item">Rice</div>
-                <div class="menu-item">Specialty Oils</div>
-                <div class="menu-item">Vinegars</div>
-                <div class="menu-item">Condiments</div>
-            </div>
+        <div class="menu-items">
+            <div class="item">Broths</div>
+            <div class="item">Grains</div>
+            <div class="item">Rice</div>
+            <div class="item">Specialty Oils</div>
+            <div class="item">Vinegars</div>
+            <div class="item">Condiments</div>
         </div>
-
-        <div class="right-col">
-            <div class="number-large">12</div>
-            <div class="vertical-text-wrapper">
-                <div class="vertical-text">Organic Pantry</div>
-            </div>
-        </div>
-
-        <div class="logo-container">
-            <div class="logo-arch"></div>
-        </div>
-
     </div>
+
+    <div class="right-column">
+        <div class="number">12</div>
+        <div class="vertical-text">Organic Pantry</div>
+    </div>
+
+    <div class="logo-arch"></div>
 
 </body>
 </html>
-
-```
